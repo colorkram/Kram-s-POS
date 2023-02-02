@@ -11,7 +11,7 @@ function Register() {
         <HomeTop kram="Create Owner Accout" />
 
         <div className="register-from">
-          {/* <h1>test</h1> */}
+          <div className="h-[300px]"></div>
           <input
             style={{ borderRadius: 100 }}
             type="email"
@@ -50,7 +50,6 @@ function Register() {
           <br />
           <br />
           <br />
-
           <button
             type="button"
             className="sub-but"
@@ -60,7 +59,6 @@ function Register() {
           </button>
           <br />
           <br />
-
           <div style={{ display: "flex", justifyContent: "center" }}>
             <input
               type="checkbox"

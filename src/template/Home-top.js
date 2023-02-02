@@ -19,10 +19,12 @@ function HomeTop(props) {
         <h1>{props.kram}</h1>
         {location.pathname == "/register" ? (
           <Link to="/">
-            <FontAwesomeIcon
-              icon={faHome}
-              className="absolute top-[32px] left-[32px] text-white text-[28px]"
-            />
+            <div className="w-[80px] h-[80px] mt-[-60px]">
+              <FontAwesomeIcon
+                icon={faHome}
+                className="absolute top-[32px] left-[32px] text-white text-[28px]"
+              />
+            </div>
           </Link>
         ) : location.pathname == "/home" ? (
           <Link to="/menubar">
@@ -33,10 +35,12 @@ function HomeTop(props) {
           </Link>
         ) : (
           <Link to="/home">
-            <FontAwesomeIcon
-              icon={faHome}
-              className="absolute top-[32px] left-[32px] text-white text-[28px]"
-            />
+            <div className="w-[80px] h-[80px] mt-[-60px]">
+              <FontAwesomeIcon
+                icon={faHome}
+                className="absolute top-[32px] left-[32px] text-white text-[28px]"
+              />
+            </div>
           </Link>
         )}
       </div>

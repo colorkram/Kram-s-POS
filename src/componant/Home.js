@@ -20,6 +20,11 @@ function Home() {
         <br />
         <br />
         <br />
+        <div className="flex justify-center">
+          <div className="flex justify-center mt-[755px] fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  ">
+            DRAWER
+          </div>
+        </div>
 
         <div className="grid grid-cols-3 gap-3">
           <Order /> <Order />
@@ -36,6 +41,7 @@ function Home() {
           <Order />
           <Order />
         </div>
+        <div className="w-[300px] h-[120px]"></div>
       </div>
     </div>
   );

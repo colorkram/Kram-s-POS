@@ -110,7 +110,8 @@
 .register-from {
   /* display: flexbox;
   justify-content: center; */
-  margin: 150px 200px;
+  margin: 0px 200px 0px 200px;
+
   width: 400px;
   height: 300px;
 }
