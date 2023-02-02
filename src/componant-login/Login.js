@@ -33,34 +33,34 @@ export default function Login() {
       "
       >
         <form className="from-input">
-          <div class="mb-3">
+          <div className="mb-3">
             <input
               style={{ borderRadius: 100 }}
               type="email"
-              class="form-control"
+              className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter email"
             />
           </div>
-          <div class="mb-3">
+          <div className="mb-3">
             <input
               style={{ borderRadius: 100 }}
               type="password"
-              class="form-control"
+              className="form-control"
               id="exampleInputPassword1"
               placeholder="Password"
             />
           </div>
           <div>
             <div className="flex-center">
-              <div class="mb-3 form-check ">
+              <div className="mb-3 form-check ">
                 <input
                   type="checkbox"
-                  class="form-check-input  "
+                  className="form-check-input  "
                   id="exampleCheck1"
                 />
-                <label class="form-check-label" for="exampleCheck1">
+                <label className="form-check-label" for="exampleCheck1">
                   Check me out
                 </label>
               </div>
@@ -68,14 +68,14 @@ export default function Login() {
             <div className="flex-center">
               <button
                 type="button"
-                class="sub-but"
+                className="sub-but"
                 // style={{ borderRadius: 100 size }}
               >
                 Submit
               </button>
             </div>
             <a
-              href="https://www.example.com"
+              href="/register"
               style={{
                 display: "flex",
                 justifyContent: "center",

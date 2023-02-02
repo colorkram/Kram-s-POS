@@ -1,26 +1,21 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import HomeTop from "../template/Home-top";
 
 function Register() {
   return (
     <div>
       <div className="container-ipad">
-        <div className="head-head relative">
-          <br />
-          <h1>Create Owner Accout</h1>
-          <FontAwesomeIcon
-            icon={faHome}
-            className="absolute top-[32px] left-[32px] text-white text-[28px]"
-          />
-        </div>
+        <HomeTop kram="Create Owner Accout" />
 
         <div className="register-from">
           {/* <h1>test</h1> */}
           <input
             style={{ borderRadius: 100 }}
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Input Shop’s Name"
@@ -29,7 +24,7 @@ function Register() {
           <input
             style={{ borderRadius: 100 }}
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Username"
@@ -38,7 +33,7 @@ function Register() {
           <input
             style={{ borderRadius: 100 }}
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Password"
@@ -47,7 +42,7 @@ function Register() {
           <input
             style={{ borderRadius: 100 }}
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Confirm Password"
@@ -58,7 +53,7 @@ function Register() {
 
           <button
             type="button"
-            class="sub-but"
+            className="sub-but"
             style={{ marginLeft: 20, height: 56 }}
           >
             Submit
@@ -69,11 +64,11 @@ function Register() {
           <div style={{ display: "flex", justifyContent: "center" }}>
             <input
               type="checkbox"
-              class="form-check-input "
+              className="form-check-input "
               id="exampleCheck1"
             />
 
-            <label class="form-check-label" for="exampleCheck1">
+            <label className="form-check-label" for="exampleCheck1">
               &nbsp;&nbsp;Please check it
             </label>
             {/* <FontAwesomeIcon icon="faCoffee" /> */}
