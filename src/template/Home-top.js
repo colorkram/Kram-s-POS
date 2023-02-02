@@ -13,7 +13,7 @@ function HomeTop(props) {
   //   console.log(menubar);
   return (
     <div>
-      {JSON.stringify(location.pathname)}
+      {/* {JSON.stringify(location.pathname)} */}
       <div className="head-head w-100">
         <br />
         <h1>{props.kram}</h1>
