@@ -11,10 +11,33 @@ function Register() {
   const [password, setPassword] = useState("");
   const [repassword, setRePassword] = useState("");
 
-  const [errorShopName, setErrorShopName] = useState("รูปแบบไม่ถูกต้อง");
-  const [errorEmail, setErrorEmail] = useState("รูปแบบไม่ถูกต้อง");
-  const [errorPassword, setErrorPassword] = useState("รูปแบบไม่ถูกต้อง");
-  const [errorRePassword, setErrorRePassword] = useState("รูปแบบไม่ถูกต้อง");
+  const [errorShopName, setErrorShopName] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorRePassword, setErrorRePassword] = useState("");
+
+  const [userNameColor, SetUserNameColor] = useState("");
+  const [emailColor, setEmailColor] = useState("");
+
+  const validateForm = e => {
+    e.preventDefault();
+
+    if (shopName.length > 3) {
+      setErrorShopName("");
+      SetUserNameColor("green");
+    } else {
+      setErrorShopName("ชื่อร้านไม่ถูกต้อง");
+      SetUserNameColor("red");
+    }
+
+    if (email.includes("@") && email.includes(".")) {
+      setErrorEmail("");
+      setEmailColor("green");
+    } else {
+      setErrorEmail("รูปแบบ Email ไม่ถูกต้อง");
+      setEmailColor("red");
+    }
+  };
   return (
     <div>
       <div className="container-ipad">
@@ -22,60 +45,64 @@ function Register() {
 
         <div className="register-from">
           <div className="h-[300px]"></div>
-          <input
-            style={{ borderRadius: 100 }}
-            type="text"
-            className="form-control"
-            placeholder="Input Shop’s Name"
-            value={shopName}
-            onChange={e => setShopName(e.target.value)}
-          />
-          {/* {console.log(shopName)} */}
-          <small>{errorShopName}</small>
-          <br />
-          <input
-            style={{ borderRadius: 100 }}
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Username"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <small>{errorEmail}</small>
+          <form className="form" onSubmit={validateForm}>
+            <input
+              style={{ borderRadius: 100, borderColor: userNameColor }}
+              type="text"
+              className="form-control"
+              placeholder="Input Shop’s Name"
+              value={shopName}
+              onChange={e => setShopName(e.target.value)}
+              // style={{ }}
+            />
+            {/* {console.log(shopName)} */}
+            <small style={{ color: userNameColor }}>{errorShopName}</small>
+            <br />
+            <input
+              style={{ borderRadius: 100, borderColor: emailColor }}
+              type="text"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            <small style={{ color: emailColor }}>{errorEmail}</small>
 
-          <br />
-          <input
-            style={{ borderRadius: 100 }}
-            className="form-control"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          <small>{errorPassword}</small>
+            <br />
+            <input
+              style={{ borderRadius: 100, borderColor: userNameColor }}
+              className="form-control"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            <small>{errorPassword}</small>
 
-          <br />
-          <input
-            style={{ borderRadius: 100 }}
-            className="form-control"
-            placeholder="Confirm Password"
-            value={repassword}
-            onChange={e => setRePassword(e.target.value)}
-          />
-          <small>{errorRePassword}</small>
+            <br />
+            <input
+              style={{ borderRadius: 100, borderColor: userNameColor }}
+              className="form-control"
+              placeholder="Confirm Password"
+              type="password"
+              value={repassword}
+              onChange={e => setRePassword(e.target.value)}
+            />
+            <small>{errorRePassword}</small>
 
-          <br />
-          <br />
-          <br />
-          <button
-            type="button"
-            className="sub-but"
-            style={{ marginLeft: 20, height: 56 }}
-          >
-            Submit
-          </button>
+            <br />
+            <br />
+            <br />
+            <button
+              type="submit"
+              className="sub-but"
+              style={{ marginLeft: 20, height: 56 }}
+            >
+              Submit
+            </button>
+          </form>
           <br />
           <br />
           <div style={{ display: "flex", justifyContent: "center" }}>
