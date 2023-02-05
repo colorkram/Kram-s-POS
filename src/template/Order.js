@@ -7,7 +7,6 @@ import CategoryBanner from "./Category-Banner";
 function Order() {
   return (
     <div className="Menu-container flex justify-center mt-26">
-      <dev></dev>
       <div className="w-60 h-auto bg-white border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700s ">
         <div>
           <img

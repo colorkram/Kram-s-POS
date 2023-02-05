@@ -9,7 +9,7 @@ function MenuBar() {
   return (
     <div>
       <div className="container-ipad">
-        <HomeTop kram="Create Owner Accout" />
+        <HomeTop kram="Setting" />
 
         <div className="grid justify-items-center space-y-20 pt-[250px]">
           <Link to="/drawer" style={{ textDecoration: "none" }}>

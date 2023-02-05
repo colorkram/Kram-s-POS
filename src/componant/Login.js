@@ -2,6 +2,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -66,13 +67,15 @@ export default function Login() {
               </div>
             </div>
             <div className="flex-center">
-              <button
-                type="button"
-                className="sub-but"
-                // style={{ borderRadius: 100 size }}
-              >
-                Submit
-              </button>
+              <Link to="/home">
+                <button
+                  type="button"
+                  className="sub-but"
+                  // style={{ borderRadius: 100 size }}
+                >
+                  Submit
+                </button>
+              </Link>
             </div>
             <a
               href="/register"
