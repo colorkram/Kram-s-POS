@@ -26,19 +26,8 @@ function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
-          <Order /> <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
-          <Order />
+        <div className=" ">
+          {/* <div className="Menu-container flex justify-center mt-26"> */}
           <Order />
         </div>
         <div className="w-[300px] h-[120px]"></div>
