@@ -6,10 +6,10 @@ function CategoryBanner() {
   const [showCategory, setShowCategory] = useState([]);
 
   // loadDataOnlyOnce();
-  // const getMe = () => axios.get('/auth/me');
+  // const getMe = () => axios.get("/auth/me");
   const getMe = async () => {
     const res = await axios.get("http://localhost:8888/category/category/1");
-    console.log(res.data);
+    // console.log(res.data);
     setShowCategory(res.data);
   };
   useEffect(() => {
@@ -17,22 +17,14 @@ function CategoryBanner() {
   }, []);
   return (
     <div className=" h-20 w-100 mt-24 flex items-center justify-center fixed overflow-x-auto">
-      <div className="category-but h-12 w-24 rounded-full border-indigo-500/100 flex items-center justify-center m-1">
-        {JSON.stringify(
-          showCategory.map(data => {
-            // if (data.category_id == 1) {
-            //   return getMe();
-            // }
-            return data.category_name;
-          }),
-        )}
-      </div>
-      <div className="category-but h-12 w-24 rounded-full border-indigo-500/100 flex items-center justify-center m-1">
-        button
-      </div>
-      <div className="category-but h-12 w-24 rounded-full border-indigo-500/100 flex items-center justify-center m-1">
-        button
-      </div>
+      {showCategory.map(data => {
+        // console.log(data.category_name);
+        return (
+          <div className="category-but h-12 w-24 rounded-full border-indigo-500/100 flex items-center justify-center m-1">
+            {data.category_name}
+          </div>
+        );
+      })}
     </div>
   );
 }

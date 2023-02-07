@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import HomeTop from "./Home-top";
 import CategoryBanner from "./Category-Banner";
+import { useEffect } from "react";
+import axios from "axios";
 
 function Order() {
   return (

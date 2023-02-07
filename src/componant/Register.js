@@ -18,6 +18,8 @@ function Register() {
 
   const [userNameColor, SetUserNameColor] = useState("");
   const [emailColor, setEmailColor] = useState("");
+  const [passwordColor, setPasswordColor] = useState("");
+  const [rePasswordColor, setRePasswordColor] = useState("");
 
   const validateForm = e => {
     e.preventDefault();
@@ -36,6 +38,18 @@ function Register() {
     } else {
       setErrorEmail("รูปแบบ Email ไม่ถูกต้อง");
       setEmailColor("red");
+    }
+    if (password.length >= 6) {
+      setErrorPassword("");
+      setPasswordColor("green");
+      if (repassword != "" && repassword === password) {
+        setErrorRePassword(" ");
+        setErrorRePassword("");
+        setPasswordColor("green");
+      } else setErrorRePassword("กรุณากยืนยัน password ให้ถูกต้อง");
+    } else {
+      setErrorPassword("พาสเวิร์ดต้องมากกว่า 6 ตัวอักษร");
+      setErrorRePassword("กรุณากยืนยัน password");
     }
   };
   return (
@@ -72,7 +86,7 @@ function Register() {
 
             <br />
             <input
-              style={{ borderRadius: 100, borderColor: userNameColor }}
+              style={{ borderRadius: 100, borderColor: passwordColor }}
               className="form-control"
               type="password"
               placeholder="Password"
@@ -83,7 +97,7 @@ function Register() {
 
             <br />
             <input
-              style={{ borderRadius: 100, borderColor: userNameColor }}
+              style={{ borderRadius: 100, borderColor: rePasswordColor }}
               className="form-control"
               placeholder="Confirm Password"
               type="password"
