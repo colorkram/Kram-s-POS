@@ -34,7 +34,7 @@ function HomeTop(props) {
             />
           </Link>
         ) : (
-          <Link to="/home">
+          <Link to="/home?test=">
             <div className="w-[80px] h-[80px] mt-[-60px]">
               <FontAwesomeIcon
                 icon={faHome}

@@ -50,6 +50,8 @@ function Register() {
     } else {
       setErrorPassword("พาสเวิร์ดต้องมากกว่า 6 ตัวอักษร");
       setErrorRePassword("กรุณากยืนยัน password");
+      setPasswordColor("red");
+      setRePasswordColor("red");
     }
   };
   return (
@@ -93,7 +95,7 @@ function Register() {
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
-            <small>{errorPassword}</small>
+            <small style={{ color: passwordColor }}>{errorPassword}</small>
 
             <br />
             <input
@@ -104,7 +106,7 @@ function Register() {
               value={repassword}
               onChange={e => setRePassword(e.target.value)}
             />
-            <small>{errorRePassword}</small>
+            <small style={{ color: rePasswordColor }}>{errorRePassword}</small>
 
             <br />
             <br />

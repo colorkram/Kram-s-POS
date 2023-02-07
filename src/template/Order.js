@@ -6,26 +6,36 @@ import HomeTop from "./Home-top";
 import CategoryBanner from "./Category-Banner";
 import { useEffect } from "react";
 import axios from "axios";
+import { useLocation, useSearchParams } from "react-router-dom";
+// import imgs from "../../../KramPosApi/public/imgae/P1270058.jpeg";
 
 function Order() {
   const [menuCard, setMenuCard] = useState([]);
+  const [searchParams] = useSearchParams();
+  // console.log(searchParams);
+  const set = searchParams.get("test");
+  console.log(set);
 
   const getMenuApi = async () => {
-    const res = await axios.get("http://localhost:8888/menu/menu/1?cat=1");
+    const res = await axios.get(`http://localhost:8888/menu/menu/1?cat=${set}`);
     setMenuCard(res.data);
   };
   useEffect(() => {
     getMenuApi();
-  }, []);
+  }, [set]);
   return (
-    <div className="Menu-container flex justify-center mt-26 grid grid-cols-3 gap-3">
+    <div className="Menu-container flex justify-center grid grid-cols-3 gap-3">
+      {/* mt-26 */}
       {menuCard.map(data => {
         return (
-          <div className="w-60 h-auto bg-white border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700s ">
+          <div
+            className="w-60 h-auto bg-white border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700s "
+            key={data.menu_id}
+          >
             <div>
               <img
                 className="p-auto rounded-t-lg w-60 h-60 "
-                src="https://scontent.fbkk2-7.fna.fbcdn.net/v/t1.15752-9/327945158_905801307332038_5601218947446989512_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeHEvNr_kSZb5glV9eO2p0FRtVgV26WftHm1WBXbpZ-0efXi_8xmWCZKoPlBXVjWPcVB1C4GWL27GWWZ_ng-9Up7&_nc_ohc=g8ki8Latr8IAX-mh5x0&_nc_ht=scontent.fbkk2-7.fna&oh=03_AdScqEuCs7x76HpL-q_Wlis2XlwWbsMBdg5SDrFUHCsrhA&oe=6401B0EA"
+                src={data.image}
                 alt="product image"
               />
             </div>
