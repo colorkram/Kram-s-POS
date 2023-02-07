@@ -17,7 +17,9 @@ function Order() {
   console.log(set);
 
   const getMenuApi = async () => {
-    const res = await axios.get(`http://localhost:8888/menu/menu/1?cat=${set}`);
+    const res = await axios.get(
+      `http://192.168.1.58:8888/menu/menu/1?cat=${set}`,
+    );
     setMenuCard(res.data);
   };
   useEffect(() => {
