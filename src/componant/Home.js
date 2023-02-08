@@ -24,7 +24,7 @@ function Home() {
 
         <div className="flex justify-center">
           <div className="flex justify-center mt-[710px]  fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  ">
-            DRAWER
+            CHECK OUT 0
           </div>
           {/* mt-[755px] */}
         </div>

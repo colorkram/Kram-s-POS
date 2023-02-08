@@ -1,11 +1,20 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HomeTop from "../template/Home-top";
 import { useState } from "react";
+import axios from "axios";
 
 function Register() {
+  const [input, setInput] = useState({
+    shop_name: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const navigate = useNavigate();
   const [shopName, setShopName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,39 +30,65 @@ function Register() {
   const [passwordColor, setPasswordColor] = useState("");
   const [rePasswordColor, setRePasswordColor] = useState("");
 
-  const validateForm = e => {
-    e.preventDefault();
+  const validateForm = async e => {
+    try {
+      e.preventDefault();
 
-    if (shopName.length > 3) {
-      setErrorShopName("");
-      SetUserNameColor("green");
-    } else {
-      setErrorShopName("ชื่อร้านไม่ถูกต้อง");
-      SetUserNameColor("red");
-    }
+      if (shopName.length > 3) {
+        setErrorShopName("");
+        SetUserNameColor("green");
+      } else {
+        setErrorShopName("ชื่อร้านไม่ถูกต้อง");
+        SetUserNameColor("red");
+      }
 
-    if (email.includes("@") && email.includes(".")) {
-      setErrorEmail("");
-      setEmailColor("green");
-    } else {
-      setErrorEmail("รูปแบบ Email ไม่ถูกต้อง");
-      setEmailColor("red");
-    }
-    if (password.length >= 6) {
-      setErrorPassword("");
-      setPasswordColor("green");
-      if (repassword != "" && repassword === password) {
-        setErrorRePassword(" ");
-        setErrorRePassword("");
+      if (email.includes("@") && email.includes(".")) {
+        setErrorEmail("");
+        setEmailColor("green");
+      } else {
+        setErrorEmail("รูปแบบ Email ไม่ถูกต้อง");
+        setEmailColor("red");
+      }
+      if (password.length >= 6) {
+        setErrorPassword("");
         setPasswordColor("green");
-      } else setErrorRePassword("กรุณากยืนยัน password ให้ถูกต้อง");
-    } else {
-      setErrorPassword("พาสเวิร์ดต้องมากกว่า 6 ตัวอักษร");
-      setErrorRePassword("กรุณากยืนยัน password");
-      setPasswordColor("red");
-      setRePasswordColor("red");
-    }
+        if (repassword != "" && repassword === password) {
+          setErrorRePassword(" ");
+          setErrorRePassword("");
+          setPasswordColor("green");
+        } else setErrorRePassword("กรุณากยืนยัน password ให้ถูกต้อง");
+      } else {
+        setErrorPassword("พาสเวิร์ดต้องมากกว่า 6 ตัวอักษร");
+        setErrorRePassword("กรุณากยืนยัน password");
+        setPasswordColor("red");
+        setRePasswordColor("red");
+      }
+      await axios.post("http://localhost:8888/register/register", {
+        shop_name: input.shop_name,
+        username: input.username,
+        password: input.password,
+      });
+      navigate("/login");
+    } catch (err) {}
   };
+
+  const handleChangleinputShopname = e => {
+    setShopName(e.target.value);
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+  const handleChangleinputEmail = e => {
+    setEmail(e.target.value);
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+  const handleChangleinputPassword = e => {
+    setPassword(e.target.value);
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+  const handleChangleinputRePassword = e => {
+    setRePassword(e.target.value);
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
   return (
     <div>
       <div className="container-ipad">
@@ -68,7 +103,8 @@ function Register() {
               className="form-control"
               placeholder="Input Shop’s Name"
               value={shopName}
-              onChange={e => setShopName(e.target.value)}
+              onChange={handleChangleinputShopname}
+              name="shop_name"
               // style={{ }}
             />
             {/* {console.log(shopName)} */}
@@ -81,8 +117,9 @@ function Register() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              value={input.email}
+              name="username"
+              onChange={handleChangleinputEmail}
             />
             <small style={{ color: emailColor }}>{errorEmail}</small>
 
@@ -93,7 +130,8 @@ function Register() {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              name="password"
+              onChange={handleChangleinputPassword}
             />
             <small style={{ color: passwordColor }}>{errorPassword}</small>
 
@@ -104,7 +142,7 @@ function Register() {
               placeholder="Confirm Password"
               type="password"
               value={repassword}
-              onChange={e => setRePassword(e.target.value)}
+              onChange={handleChangleinputRePassword}
             />
             <small style={{ color: rePasswordColor }}>{errorRePassword}</small>
 
