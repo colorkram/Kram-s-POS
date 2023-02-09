@@ -2,23 +2,35 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+
+// import { useAuth } from "";
 
 export default function Login() {
   const [input, setInput] = useState({
     username: "",
     password: "",
   });
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleChangleinput = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
   const handleSubmitForm = async e => {
     try {
       e.preventDefault();
-      const res = await axios.post("http://localhost:8888/login/login", input);
-    } catch (err) {}
+      // const res = await axios.post("http://localhost:8888/user/login", input);
+      await login(input.username, input.password);
+      alert("Signed");
+      navigate("/home?test=");
+    } catch (err) {
+      console.log("err", err);
+    }
   };
   return (
     <div className="container-ipad">
@@ -88,15 +100,13 @@ export default function Login() {
               </div>
             </div>
             <div className="flex-center">
-              <Link to="/home">
-                <button
-                  type="button"
-                  className="sub-but"
-                  // style={{ borderRadius: 100 size }}
-                >
-                  Submit
-                </button>
-              </Link>
+              <button
+                type="submit"
+                className="sub-but"
+                // style={{ borderRadius: 100 size }}
+              >
+                login
+              </button>
             </div>
             <a
               href="/register"

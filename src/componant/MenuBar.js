@@ -4,8 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import HomeTop from "../template/Home-top";
+import {
+  // getAccessToken,
+  removeAccessToken,
+  // setAccessToken,
+} from "../utils/local-storage";
 
 function MenuBar() {
+  const logout = () => {
+    // confirm("อย่าลืมปิดรอบนะ");
+    removeAccessToken();
+    alert("already logout");
+  };
   return (
     <div>
       <div className="container-ipad">
@@ -27,7 +37,14 @@ function MenuBar() {
               MENUS
             </div>
           </Link>
-          <span className="text-[40px] text-red-500 pt-[170px]">Log Out</span>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <span
+              className="text-[40px] text-red-500 pt-[170px]"
+              onClick={logout}
+            >
+              Log Out
+            </span>
+          </Link>
         </div>
       </div>
     </div>
