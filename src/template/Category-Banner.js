@@ -9,6 +9,8 @@ function CategoryBanner() {
   const { getUserData } = useContext(AuthContext);
   const [showCategory, setShowCategory] = useState([]);
   const [searchParams] = useSearchParams();
+  const catId = searchParams.get("test");
+
   // const useId = searchParams.get("use");
   // console.log(ACCESS_TOKEN.data);
 
@@ -27,7 +29,12 @@ function CategoryBanner() {
   return (
     <div className=" h-20 w-[100%] mt-[105px]  flex items-center justify-center fixed overflow-x-scroll overflow-y-hidden ">
       <Link to={`/home?test=`}>
-        <div className="category-all h-[70px] w-[120px] rounded-full border-indigo-500/100 flex items-center justify-center m-3">
+        <div
+          className={
+            (catId ? "category-but " : "category-all ") +
+            "h-[70px] w-[120px] rounded-full border-indigo-500/100 flex items-center justify-center m-3"
+          }
+        >
           all Menus
         </div>
       </Link>
@@ -35,7 +42,14 @@ function CategoryBanner() {
       {showCategory.map(data => {
         return (
           <Link key={data.category_id} to={`/home?test=${data.category_id}`}>
-            <div className="category-but h-[70px] w-[120px] rounded-full border-indigo-500/100 flex items-center justify-center m-3">
+            <div
+              className={
+                (catId == data.category_id
+                  ? "category-all "
+                  : "category-but ") +
+                "category-but h-[70px] w-[120px] rounded-full border-indigo-500/100 flex items-center justify-center m-3"
+              }
+            >
               {/* h-12 w-24  */}
               {data.category_name}
             </div>

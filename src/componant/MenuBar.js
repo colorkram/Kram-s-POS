@@ -38,10 +38,7 @@ function MenuBar() {
             </div>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <span
-              className="text-[40px] text-red-500 pt-[170px]"
-              onClick={logout}
-            >
+            <span className="text-[40px] text-red-500 " onClick={logout}>
               Log Out
             </span>
           </Link>

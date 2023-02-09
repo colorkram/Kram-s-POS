@@ -32,7 +32,17 @@ function Order() {
       `http://localhost:8888/menu/menu/${userr.user_id}?cat=${catId}`,
       // `http://localhost:8888/menu/menu/useId=${useId}?cat=${catId}`,
     );
-    setMenuCard(res.data);
+    setMenuCard(res.data.map(item => ({ ...item, action: false })));
+  };
+  const toggleCss = index => {
+    const newMenu = [...menuCard];
+    newMenu[index].action = true;
+    setMenuCard(newMenu);
+    setTimeout(() => {
+      const newMenu = [...menuCard];
+      newMenu[index].action = false;
+      setMenuCard(newMenu);
+    }, 400);
   };
   useEffect(() => {
     getMenuApi();
@@ -40,13 +50,17 @@ function Order() {
   return (
     <div className="Menu-container flex justify-center grid grid-cols-3 gap-3">
       {/* mt-26 */}
-      {menuCard.map(data => {
+      {menuCard.map((data, index) => {
         return (
           <div
-            className="w-60 h-auto bg-white border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700s "
+            className={
+              (data.action ? "animate__animated animate__heartBeat " : "") +
+              "w-60 h-auto bg-white border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700s"
+            }
             key={data.menu_id}
             onClick={() => {
               getOrder(data);
+              toggleCss(index);
             }}
           >
             <div>
