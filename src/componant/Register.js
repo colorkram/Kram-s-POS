@@ -40,6 +40,7 @@ function Register() {
       } else {
         setErrorShopName("ชื่อร้านไม่ถูกต้อง");
         SetUserNameColor("red");
+        throw new Error("wrong");
       }
 
       if (email.includes("@") && email.includes(".")) {
@@ -48,6 +49,7 @@ function Register() {
       } else {
         setErrorEmail("รูปแบบ Email ไม่ถูกต้อง");
         setEmailColor("red");
+        throw new Error("wrong");
       }
       if (password.length >= 6) {
         setErrorPassword("");
@@ -56,19 +58,26 @@ function Register() {
           setErrorRePassword(" ");
           setErrorRePassword("");
           setPasswordColor("green");
-        } else setErrorRePassword("กรุณากยืนยัน password ให้ถูกต้อง");
+        } else {
+          setErrorRePassword("กรุณากยืนยัน password ให้ถูกต้อง");
+          setRePasswordColor("red");
+
+          throw new Error("wrong");
+        }
       } else {
         setErrorPassword("พาสเวิร์ดต้องมากกว่า 6 ตัวอักษร");
         setErrorRePassword("กรุณากยืนยัน password");
         setPasswordColor("red");
         setRePasswordColor("red");
+        throw new Error("wrong");
       }
-      await axios.post("http://localhost:8888/register/register", {
+
+      await axios.post("http://localhost:8888/user/register", {
         shop_name: input.shop_name,
         username: input.username,
         password: input.password,
       });
-      navigate("/login");
+      navigate("/");
     } catch (err) {}
   };
 
@@ -86,7 +95,7 @@ function Register() {
   };
   const handleChangleinputRePassword = e => {
     setRePassword(e.target.value);
-    setInput({ ...input, [e.target.name]: e.target.value });
+    setErrorRePassword("กรุณากยืนยัน password");
   };
 
   return (
@@ -166,7 +175,7 @@ function Register() {
               id="exampleCheck1"
             />
 
-            <label className="form-check-label" for="exampleCheck1">
+            <label className="form-check-label" htmlFor="exampleCheck1">
               &nbsp;&nbsp;Please check it
             </label>
             {/* <FontAwesomeIcon icon="faCoffee" /> */}

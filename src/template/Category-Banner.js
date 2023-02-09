@@ -9,7 +9,7 @@ function CategoryBanner() {
   // loadDataOnlyOnce();
   // const getMe = () => axios.get("/auth/me");
   const getMe = async () => {
-    const res = await axios.get("http://192.168.1.58:8888/category/category/1");
+    const res = await axios.get("http://localhost:8888/category/category/1");
     // console.log(res.data);
     setShowCategory(res.data);
   };

@@ -3,8 +3,23 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export default function Login() {
+  const [input, setInput] = useState({
+    username: "",
+    password: "",
+  });
+  const handleChangleinput = e => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+  const handleSubmitForm = async e => {
+    try {
+      e.preventDefault();
+      const res = await axios.post("http://localhost:8888/login/login", input);
+    } catch (err) {}
+  };
   return (
     <div className="container-ipad">
       {/* <FontAwesomeIcon icon={faHome} /> */}
@@ -33,15 +48,18 @@ export default function Login() {
         className="loginForm
       "
       >
-        <form className="from-input">
+        <form className="from-input" onSubmit={handleSubmitForm}>
           <div className="mb-3">
             <input
               style={{ borderRadius: 100 }}
-              type="email"
+              type="text"
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter email"
+              name="username"
+              value={input.username}
+              onChange={handleChangleinput}
             />
           </div>
           <div className="mb-3">
@@ -51,6 +69,9 @@ export default function Login() {
               className="form-control"
               id="exampleInputPassword1"
               placeholder="Password"
+              name="password"
+              value={input.password}
+              onChange={handleChangleinput}
             />
           </div>
           <div>
@@ -61,7 +82,7 @@ export default function Login() {
                   className="form-check-input  "
                   id="exampleCheck1"
                 />
-                <label className="form-check-label" for="exampleCheck1">
+                <label className="form-check-label" htmlFor="exampleCheck1">
                   Check me out
                 </label>
               </div>
