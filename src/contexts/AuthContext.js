@@ -12,7 +12,9 @@ import {
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
-  const [authenticatedUser, setAuthenticatedUser] = useState(null);
+  const [authenticatedUser, setAuthenticatedUser] = useState(
+    getAccessToken() ? true : null,
+  );
 
   useEffect(() => {
     const fetchAuthUser = async () => {
@@ -21,6 +23,7 @@ export default function AuthContextProvider({ children }) {
         const token = await getAccessToken();
         const user = await jwtDecode(token);
         setAuthenticatedUser(user);
+        console.log("user", user);
         //  ไปหน้า home
       } catch (err) {
         removeAccessToken();
@@ -32,6 +35,18 @@ export default function AuthContextProvider({ children }) {
       fetchAuthUser();
     }
   }, []);
+
+  const getUserData = async () => {
+    try {
+      // const res = await authApi.getMe();
+      const token = await getAccessToken();
+      const user = await jwtDecode(token);
+      return user;
+      //  ไปหน้า home
+    } catch (err) {
+      return false;
+    }
+  };
 
   const login = async (username, password) => {
     const res = await authApi.login({ username, password });
@@ -60,6 +75,7 @@ export default function AuthContextProvider({ children }) {
         login,
         logout,
         updateProfile,
+        getUserData,
       }}
     >
       {children}

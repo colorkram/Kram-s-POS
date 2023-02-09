@@ -85,6 +85,19 @@
 
 }
 
+.category-all {
+  /* width: 100px;
+  height: 48px;
+  border-radius: 2000px; */
+  color: white;
+  background-color: #196222;
+  /* border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center; */
+
+}
+
 .head-head {
   background-color: #3C6255;
   position: fixed;

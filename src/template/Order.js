@@ -7,22 +7,34 @@ import CategoryBanner from "./Category-Banner";
 import { useEffect } from "react";
 import axios from "axios";
 import { useLocation, useSearchParams } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+
 // import imgs from "../../../KramPosApi/public/imgae/P1270058.jpeg";
 
 function Order() {
+  const { getUserData } = useContext(AuthContext);
+
+  // const { login } = useContext(AuthContext);
   const [menuCard, setMenuCard] = useState([]);
   const [searchParams] = useSearchParams();
   // console.log(searchParams);
-  const set = searchParams.get("test");
-  console.log(set);
+  const catId = searchParams.get("test");
+  const useId = searchParams.get("useid");
+  console.log(catId, "and", useId);
 
   const getMenuApi = async () => {
-    const res = await axios.get(`http://localhost:8888/menu/menu/1?cat=${set}`);
+    const userr = await getUserData();
+    console.log("userr", userr.user_id);
+    const res = await axios.get(
+      `http://localhost:8888/menu/menu/${userr.user_id}?cat=${catId}`,
+      // `http://localhost:8888/menu/menu/useId=${useId}?cat=${catId}`,
+    );
     setMenuCard(res.data);
   };
   useEffect(() => {
     getMenuApi();
-  }, [set]);
+  }, [catId, useId]);
   return (
     <div className="Menu-container flex justify-center grid grid-cols-3 gap-3">
       {/* mt-26 */}

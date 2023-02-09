@@ -15,11 +15,18 @@ export default function Login() {
     username: "",
     password: "",
   });
-  const { login } = useContext(AuthContext);
+  const { login, authenticatedUser } = useContext(AuthContext);
+
+  setTimeout(() => {
+    if (authenticatedUser) {
+      console.log(authenticatedUser.user_id);
+    }
+  }, 2000);
   const navigate = useNavigate();
 
   const handleChangleinput = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
+    console.log(authenticatedUser);
   };
   const handleSubmitForm = async e => {
     try {
