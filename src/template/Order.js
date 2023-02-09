@@ -8,12 +8,14 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useContext } from "react";
+import { DrawerContext } from "../contexts/DrawerContext";
 import { AuthContext } from "../contexts/AuthContext";
 
 // import imgs from "../../../KramPosApi/public/imgae/P1270058.jpeg";
 
 function Order() {
   const { getUserData } = useContext(AuthContext);
+  const { getOrder } = useContext(DrawerContext);
 
   // const { login } = useContext(AuthContext);
   const [menuCard, setMenuCard] = useState([]);
@@ -43,6 +45,9 @@ function Order() {
           <div
             className="w-60 h-auto bg-white border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700s "
             key={data.menu_id}
+            onClick={() => {
+              getOrder(data);
+            }}
           >
             <div>
               <img
@@ -61,12 +66,9 @@ function Order() {
                 <span className="text-3xl font-bold text-gray-900  text-red">
                   {data.price}
                 </span>
-                <a
-                  href="#"
-                  className="text-white bg-blue-700 font-medium rounded-lg text-sm px-2 py-2 text-center  bg-blue-600  hover:bg-blue-700  focus:ring-blue-800"
-                >
+                <div className="text-white bg-blue-700 font-medium rounded-lg text-sm px-2 py-2 text-center  bg-blue-600  hover:bg-blue-700  focus:ring-blue-800">
                   Add to cart
-                </a>
+                </div>
               </div>
             </div>
           </div>

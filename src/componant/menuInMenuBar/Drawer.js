@@ -1,8 +1,20 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import HomeTop from "../../template/Home-top";
 import TitleBar from "../../template/TitleBar";
 
 export default function Drawer() {
+  const [showDrawer, setShowDrawer] = useState([]);
+
+  const getCurrentDrawer = async () => {
+    const res = await axios.get(`http://localhost:8888/drawer/currentdrawer/`);
+    // console.log(res.data);
+    setShowDrawer(res.data);
+  };
+  useEffect(() => {
+    getCurrentDrawer();
+  }, []);
   return (
     <div>
       <HomeTop kram="Drawer" />

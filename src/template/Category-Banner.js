@@ -16,11 +16,8 @@ function CategoryBanner() {
   // const getMe = () => axios.get("/auth/me");
   const getCategory = async () => {
     const userr = await getUserData();
-    console.log("userr", userr.user_id);
-    const res = await axios.get(
-      `http://localhost:8888/category/category/${userr.user_id}`,
-      // `http://localhost:8888/category/category/user_id=${useId}`,
-    );
+
+    const res = await axios.get(`http://localhost:8888/category/category/`);
     // console.log(res.data);
     setShowCategory(res.data);
   };

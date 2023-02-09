@@ -3,13 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import AuthContextProvider from "./contexts/AuthContext";
+import DrawerContextProvider from "./contexts/DrawerContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <App />
+      <DrawerContextProvider>
+        <App />
+      </DrawerContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
 );
