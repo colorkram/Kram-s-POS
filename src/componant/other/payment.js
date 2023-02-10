@@ -5,11 +5,20 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import HomeTop from "../../template/Home-top";
 import TitleBar from "../../template/TitleBar";
+import { DrawerContext } from "../../contexts/DrawerContext";
+import { useContext, useState } from "react";
 
 function Payment() {
   const items = {
     bath: 1000,
   };
+  const {
+    drawerData,
+    getCurrentDrawer,
+    selectOrder,
+    drawerDataLength,
+  } = useContext(DrawerContext);
+  console.log("ควย:" + selectOrder);
   return (
     <div>
       <div className="container-ipad">
@@ -17,18 +26,17 @@ function Payment() {
         <div className="bigDiv flex h-[1025px]">
           <div className="menuSideBar w-full ">
             <div className="mt-[95px] p-[8px]">
-              {[
-                { Menu_Name: "ขนมปัง", total: 10, count_Price: 100 },
-                { bill_id: "fefef", total: 9999, drawer_id: "sdfeg223g3g" },
-              ].map(item => (
+              {/* [{ Menu_Name: "ขนมปัง", total: 10, count_Price: 100 }] */}
+              {selectOrder.map(item => (
                 <div className="bg-white w-full rounded-lg">
                   <div className="flex justify-between ml-6 mr-6 mt-2 ">
-                    <span>Menu : {item.Menu_Name}</span>
-                    <span>Total: {item.count_Price}</span>
+                    <span>Menu : {item.menu_name}</span>
+                    <span>Total: {item.price}</span>
                   </div>
                   <div className="ml-6 mr-6 mt-5 mb-2">drawer ID : 112</div>
                 </div>
               ))}
+              {/* {JSON.stringify(selectOrder)} */}
             </div>
           </div>
           <div className="BillDetel bg-white w-full  ">

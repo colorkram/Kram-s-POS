@@ -5,11 +5,14 @@ import HomeTop from "../template/Home-top";
 import Br from "../template/br";
 import CategoryBanner from "../template/Category-Banner";
 import Order from "../template/Order";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DrawerContext } from "../contexts/DrawerContext";
 import { useContext, useState } from "react";
+import OpenDrawer from "./other/openDrawer";
 
 function Home() {
+  const navigate = useNavigate();
+
   const {
     drawerData,
     getCurrentDrawer,
@@ -32,6 +35,10 @@ function Home() {
     <div>
       <div className="container-ipad">
         <HomeTop kram="Codecamp's Shop" />
+        <Br />
+        <Br />
+
+        <OpenDrawer />
 
         {drawerData ? ( //ถ้าเปิด drawer ไปแล้วจะเข้าบรรทัดถัดไป ถ้าไม่จะเป็น null
           <div>
@@ -45,6 +52,9 @@ function Home() {
                   (animate ? "animate__animated animate__bounce" : "") +
                   " flex justify-center mt-[710px]  fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  "
                 }
+                onClick={() => {
+                  navigate("/payment");
+                }}
               >
                 CHECK OUT {drawerDataLength}
               </div>
