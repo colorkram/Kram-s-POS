@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import HomeTop from "../../template/Home-top";
 import TitleBar from "../../template/TitleBar";
 import { DrawerContext } from "../../contexts/DrawerContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,7 @@ function Payment() {
     selectOrder,
     drawerDataLength,
   } = useContext(DrawerContext);
+  const { getUserData } = useContext(AuthContext);
   // console.log("kram:" + selectOrder);
   // const [totalAmout, setTotalAmout] = useState("");
   let total = [...selectOrder];
@@ -33,7 +35,7 @@ function Payment() {
   };
 
   const sum = pricesSum(total);
-  console.log("dadv" + drawerData);
+  // console.log("dadv" + drawerData);
   const [changeMoney, setChangeMoney] = useState(0);
   const [input, setInput] = useState({
     // change_money: "",
@@ -43,10 +45,19 @@ function Payment() {
     // menu_id: "",
     // item_price: "",
   });
+  const Visa = async e => {
+    // setฺ...(e.target.value);
+
+    await setInput({ ...input, payment_amout: e });
+    setTimeout(() => {
+      submit("VISA");
+    }, 3000);
+  };
   const submit = async paymentType => {
     try {
       await axios.post("http://localhost:8888/bill/bill", {
         // user แนบมาให้แยู๋แล้ว
+        user_id: "25",
         total: sum,
         payment_amout: input.payment_amout,
         change_money: sum - input.payment_amout,
@@ -54,15 +65,16 @@ function Payment() {
         selectOrder: selectOrder,
         payment_type: paymentType,
       });
-      navigate("/");
+      navigate("/home?test=");
     } catch (err) {}
   };
-  console.log("mock" + JSON.stringify(selectOrder));
+  console.log("mock" + input.payment_amout);
   // const submit = ()
   const handleChangleinput = e => {
-    // setฺ...(e.target.value);
     setInput({ ...input, [e.target.name]: e.target.value });
   };
+
+  console.log(input);
   return (
     <div>
       <div className="container-ipad">
@@ -117,7 +129,7 @@ function Payment() {
               <button
                 type="button"
                 className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-800 dark:bg-white dark:border-gray-700 dark:text-gray-900 dark:hover:bg-gray-200 mr-2 mb-2"
-                onClick={() => submit("VISA")}
+                onClick={() => Visa(sum)}
               >
                 <svg
                   aria-hidden="true"
