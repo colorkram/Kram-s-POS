@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -10,8 +10,11 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+// import { confirm } from "react-confirm-box";
 
 function Payment() {
+  const refresh = () => window.location.reload(true);
+  // const [abc, setAbc] = useState(123);
   const navigate = useNavigate();
   // const items = {
   //   bath: 1000,
@@ -21,6 +24,7 @@ function Payment() {
     getCurrentDrawer,
     selectOrder,
     drawerDataLength,
+    setSelectOrder,
   } = useContext(DrawerContext);
   const { getUserData } = useContext(AuthContext);
   // console.log("kram:" + selectOrder);
@@ -49,10 +53,12 @@ function Payment() {
     // setฺ...(e.target.value);
 
     await setInput({ ...input, payment_amout: e });
-    setTimeout(() => {
-      submit("VISA");
-    }, 3000);
+
+    // submit("VISA");
   };
+  useEffect(() => {
+    Visa(sum);
+  }, [1]);
   const submit = async paymentType => {
     try {
       await axios.post("http://localhost:8888/bill/bill", {
@@ -65,7 +71,9 @@ function Payment() {
         selectOrder: selectOrder,
         payment_type: paymentType,
       });
-      navigate("/home?test=");
+
+      await navigate("/home?test=");
+      refresh();
     } catch (err) {}
   };
   console.log("mock" + input.payment_amout);
@@ -74,7 +82,6 @@ function Payment() {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  console.log(input);
   return (
     <div>
       <div className="container-ipad">
@@ -129,7 +136,7 @@ function Payment() {
               <button
                 type="button"
                 className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-800 dark:bg-white dark:border-gray-700 dark:text-gray-900 dark:hover:bg-gray-200 mr-2 mb-2"
-                onClick={() => Visa(sum)}
+                onClick={() => submit("VISA")}
               >
                 <svg
                   aria-hidden="true"
