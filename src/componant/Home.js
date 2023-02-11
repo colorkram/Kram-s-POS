@@ -35,10 +35,6 @@ function Home() {
     <div>
       <div className="container-ipad">
         <HomeTop kram="Codecamp's Shop" />
-        <Br />
-        <Br />
-
-        <OpenDrawer />
 
         {drawerData ? ( //ถ้าเปิด drawer ไปแล้วจะเข้าบรรทัดถัดไป ถ้าไม่จะเป็น null
           <div>
@@ -64,7 +60,14 @@ function Home() {
             </div>
             <div className="w-[300px] h-[120px]"></div>
           </div>
-        ) : null}
+        ) : (
+          <div>
+            <Br />
+            <Br />
+
+            <OpenDrawer />
+          </div>
+        )}
       </div>
     </div>
   );

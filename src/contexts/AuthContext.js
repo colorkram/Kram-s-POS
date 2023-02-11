@@ -63,10 +63,10 @@ export default function AuthContextProvider({ children }) {
     setAuthenticatedUser({ ...authenticatedUser, ...data });
   };
 
-  const [test, setTest] = useState("test1");
-  const testFunction = a => {
-    alert("test");
-  };
+  // const [test, setTest] = useState("test1");
+  // const testFunction = a => {
+  //   alert("test");
+  // };
 
   return (
     <AuthContext.Provider

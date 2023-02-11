@@ -7,18 +7,62 @@ import HomeTop from "../../template/Home-top";
 import TitleBar from "../../template/TitleBar";
 import { DrawerContext } from "../../contexts/DrawerContext";
 import { useContext, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Payment() {
-  const items = {
-    bath: 1000,
-  };
+  const navigate = useNavigate();
+  // const items = {
+  //   bath: 1000,
+  // };
   const {
     drawerData,
     getCurrentDrawer,
     selectOrder,
     drawerDataLength,
   } = useContext(DrawerContext);
-  console.log("ควย:" + selectOrder);
+  // console.log("kram:" + selectOrder);
+  // const [totalAmout, setTotalAmout] = useState("");
+  let total = [...selectOrder];
+
+  const pricesSum = e => {
+    let sum = 0;
+    e.forEach(item => (sum += Number(item.price)));
+
+    return Number(sum);
+  };
+
+  const sum = pricesSum(total);
+  console.log("dadv" + drawerData);
+  const [changeMoney, setChangeMoney] = useState(0);
+  const [input, setInput] = useState({
+    // change_money: "",
+    payment_amout: "",
+    // drawer_id: "",
+    // payment_type: "",
+    // menu_id: "",
+    // item_price: "",
+  });
+  const submit = async paymentType => {
+    try {
+      await axios.post("http://localhost:8888/bill/bill", {
+        // user แนบมาให้แยู๋แล้ว
+        total: sum,
+        payment_amout: input.payment_amout,
+        change_money: sum - input.payment_amout,
+        drawer_id: drawerData.drawer_id,
+        selectOrder: selectOrder,
+        payment_type: paymentType,
+      });
+      navigate("/");
+    } catch (err) {}
+  };
+  console.log("mock" + JSON.stringify(selectOrder));
+  // const submit = ()
+  const handleChangleinput = e => {
+    // setฺ...(e.target.value);
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
   return (
     <div>
       <div className="container-ipad">
@@ -44,9 +88,7 @@ function Payment() {
             <div className="flex justify-center pt-[60px] text-[38px] mb-6">
               Total
             </div>
-            <div className="flex justify-center  text-[38px] mb-6">
-              {items.bath}
-            </div>
+            <div className="flex justify-center  text-[38px] mb-6">{sum}</div>
             <br />
             <br />
             <br />
@@ -59,7 +101,10 @@ function Payment() {
             <input
               type="text"
               id="small-input"
-              placeholder={items.bath}
+              name="payment_amout"
+              value={input.payment_amout}
+              placeholder={sum}
+              onChange={handleChangleinput}
               class="block w-[250px]  p-[20px] ml-[65px] text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-lg text-center   bg-gray-200   border-white-600   placeholder-white-400   text-black  "
             />
             <label
@@ -72,6 +117,7 @@ function Payment() {
               <button
                 type="button"
                 className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-800 dark:bg-white dark:border-gray-700 dark:text-gray-900 dark:hover:bg-gray-200 mr-2 mb-2"
+                onClick={() => submit("VISA")}
               >
                 <svg
                   aria-hidden="true"
@@ -96,6 +142,7 @@ function Payment() {
               <button
                 type="button"
                 className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-800 dark:bg-white dark:border-gray-700 dark:text-gray-900 dark:hover:bg-gray-200 mr-2 mb-2"
+                onClick={() => submit("CASH")}
               >
                 Pay with CASH
               </button>

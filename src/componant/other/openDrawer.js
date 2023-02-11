@@ -7,7 +7,7 @@ function OpenDrawer() {
         กรุณาใส่เงินเปิดรอบ
       </div>
       <input
-        className="bg-sky-500/75  mt-[50px] w-[250px] h-[50px]"
+        className="bg-sky-100/75  mt-[50px] w-[250px] h-[50px]"
         placeholder="Baht / บาท"
       />
       <br />

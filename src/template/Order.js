@@ -27,10 +27,10 @@ function Order() {
 
   const getMenuApi = async () => {
     const userr = await getUserData();
-    console.log("userr", userr.user_id);
+    // console.log("userr", userr.user_id);
     const res = await axios.get(
       `http://localhost:8888/menu/menu/${userr.user_id}?cat=${catId}`,
-      // `http://localhost:8888/menu/menu/useId=${useId}?cat=${catId}`,
+      // `http://localhost:8888/menu/menu/1?cat=1`,
     );
     setMenuCard(res.data.map(item => ({ ...item, action: false })));
   };
