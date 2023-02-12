@@ -50,17 +50,27 @@ function Home() {
                 {/* <div>{JSON.stringify(selectOrder)}</div> */}
 
                 <div className="flex justify-center">
-                  <div
-                    className={
-                      (animate ? "animate__animated animate__bounce" : "") +
-                      " flex justify-center mt-[710px]  fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  "
-                    }
-                    onClick={() => {
-                      navigate("/payment");
-                    }}
-                  >
-                    CHECK OUT {drawerDataLength}
-                  </div>
+                  {drawerDataLength >= 1 ? (
+                    <div
+                      className={
+                        (animate ? "animate__animated animate__bounce" : "") +
+                        " flex justify-center mt-[710px]  fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  "
+                      }
+                      onClick={() => {
+                        navigate("/payment");
+                      }}
+                    >
+                      CHECK OUT {drawerDataLength}
+                    </div>
+                  ) : // <div
+                  //   className={
+                  //     (animate ? "animate__animated animate__bounce" : "") +
+                  //     " flex justify-center mt-[710px]  fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  "
+                  //   }
+                  // >
+                  //   CHECK OUT {drawerDataLength}
+                  // </div>
+                  null}
                 </div>
                 <div className=" ">
                   <Order />

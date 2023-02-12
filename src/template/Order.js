@@ -20,7 +20,6 @@ function Order() {
   // const { login } = useContext(AuthContext);
   const [menuCard, setMenuCard] = useState([]);
   const [searchParams] = useSearchParams();
-  // console.log(searchParams);
   const catId = searchParams.get("test");
   const useId = searchParams.get("useid");
   console.log(catId, "and", useId);

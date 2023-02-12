@@ -65,14 +65,13 @@ function Payment() {
         // user แนบมาให้แยู๋แล้ว
         total: sum,
         payment_amout: input.payment_amout,
-        change_money: sum - input.payment_amout,
+        change_money: input.payment_amout - sum,
         drawer_id: drawerData.drawer_id,
         selectOrder: selectOrder,
         payment_type: paymentType,
       });
       const billId = resBill.data.createBill.bill_id;
       await navigate(`/bill/${billId}`);
-      // refresh();
     } catch (err) {}
   };
   console.log("mock" + input.payment_amout);
@@ -166,7 +165,10 @@ function Payment() {
                 Pay with CASH
               </button>
             </div>
-            <div className="flex justify-center pt-[60px] text-[38px] mb-6 text-red-600">
+            <div
+              className="flex justify-center pt-[60px] text-[38px] mb-6 text-red-600"
+              onClick={refresh()}
+            >
               VOID
             </div>
           </div>
