@@ -3,7 +3,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
@@ -17,16 +17,16 @@ export default function Login() {
   });
   const { login, authenticatedUser } = useContext(AuthContext);
 
-  setTimeout(() => {
-    if (authenticatedUser) {
-      console.log(authenticatedUser.user_id);
-    }
-  }, 2000);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authenticatedUser) {
+      navigate("/home?test=");
+    }
+  }, []);
 
   const handleChangleinput = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(authenticatedUser);
   };
   const handleSubmitForm = async e => {
     try {

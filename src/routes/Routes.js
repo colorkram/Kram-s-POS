@@ -9,6 +9,7 @@ import AllBills from "../componant/menuInMenuBar/AllBills";
 import EditMenu from "../componant/menuInMenuBar/EditMenu";
 import Report from "../componant/menuInMenuBar/Report";
 import Payment from "../componant/other/payment";
+import Bill from "../componant/other/Bill";
 
 const router = createBrowserRouter([
   { path: "/", element: <Login /> },
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
   { path: "/editmenu", element: <EditMenu /> },
   { path: "/Report", element: <Report /> },
   { path: "/Payment", element: <Payment /> },
+  { path: "/bill/:bill_id", element: <Bill /> },
 ]);
 export default function Routes() {
   return <RouterProvider router={router} />;

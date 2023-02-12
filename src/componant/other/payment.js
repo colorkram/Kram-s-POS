@@ -61,9 +61,8 @@ function Payment() {
   }, [1]);
   const submit = async paymentType => {
     try {
-      await axios.post("http://localhost:8888/bill/bill", {
+      const resBill = await axios.post("http://localhost:8888/bill/bill", {
         // user แนบมาให้แยู๋แล้ว
-        user_id: "25",
         total: sum,
         payment_amout: input.payment_amout,
         change_money: sum - input.payment_amout,
@@ -71,9 +70,9 @@ function Payment() {
         selectOrder: selectOrder,
         payment_type: paymentType,
       });
-
-      await navigate("/home?test=");
-      refresh();
+      const billId = resBill.data.createBill.bill_id;
+      await navigate(`/bill/${billId}`);
+      // refresh();
     } catch (err) {}
   };
   console.log("mock" + input.payment_amout);
@@ -95,6 +94,7 @@ function Payment() {
                   <div className="flex justify-between ml-6 mr-6 mt-2 ">
                     <span>Menu : {item.menu_name}</span>
                     <span>Total: {item.price}</span>
+                    <span>Total: {item.qty}</span>
                   </div>
                   <div className="ml-6 mr-6 mt-5 mb-2">drawer ID : 112</div>
                 </div>

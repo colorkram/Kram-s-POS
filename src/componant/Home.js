@@ -12,6 +12,8 @@ import OpenDrawer from "./other/openDrawer";
 
 function Home() {
   const navigate = useNavigate();
+  const [animate, setAnimate] = useState(false);
+  const [loading, setLoadding] = useState(true);
 
   const {
     drawerData,
@@ -20,10 +22,14 @@ function Home() {
     drawerDataLength,
   } = useContext(DrawerContext);
   // ยิงเช็คจาก context
+
   useEffect(() => {
     getCurrentDrawer();
+    setTimeout(() => {
+      setLoadding(false);
+    }, 1000);
   }, []);
-  const [animate, setAnimate] = useState(false);
+
   useEffect(() => {
     setAnimate(true);
     setTimeout(() => {
@@ -35,37 +41,40 @@ function Home() {
     <div>
       <div className="container-ipad">
         <HomeTop kram="Codecamp's Shop" />
-
-        {drawerData ? ( //ถ้าเปิด drawer ไปแล้วจะเข้าบรรทัดถัดไป ถ้าไม่จะเป็น null
+        {loading ? null : (
           <div>
-            <CategoryBanner />
-            <Br />
-            {/* <div>{JSON.stringify(selectOrder)}</div> */}
+            {drawerData ? ( //ถ้าเปิด drawer ไปแล้วจะเข้าบรรทัดถัดไป ถ้าไม่จะเป็น null
+              <div>
+                <CategoryBanner />
+                <Br />
+                {/* <div>{JSON.stringify(selectOrder)}</div> */}
 
-            <div className="flex justify-center">
-              <div
-                className={
-                  (animate ? "animate__animated animate__bounce" : "") +
-                  " flex justify-center mt-[710px]  fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  "
-                }
-                onClick={() => {
-                  navigate("/payment");
-                }}
-              >
-                CHECK OUT {drawerDataLength}
+                <div className="flex justify-center">
+                  <div
+                    className={
+                      (animate ? "animate__animated animate__bounce" : "") +
+                      " flex justify-center mt-[710px]  fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  "
+                    }
+                    onClick={() => {
+                      navigate("/payment");
+                    }}
+                  >
+                    CHECK OUT {drawerDataLength}
+                  </div>
+                </div>
+                <div className=" ">
+                  <Order />
+                </div>
+                <div className="w-[300px] h-[120px]"></div>
               </div>
-            </div>
-            <div className=" ">
-              <Order />
-            </div>
-            <div className="w-[300px] h-[120px]"></div>
-          </div>
-        ) : (
-          <div>
-            <Br />
-            <Br />
+            ) : (
+              <div>
+                <Br />
+                <Br />
 
-            <OpenDrawer />
+                <OpenDrawer />
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -19,9 +19,20 @@ export default function DrawerContextProvider({ children }) {
   const [selectOrder, setSelectOrder] = useState([]);
   function getOrder(item) {
     const newList = [...selectOrder];
-    newList.push(item);
+
+    const fineItem = newList.find(i => i.menu_id == item.menu_id);
+
+    if (fineItem) {
+      fineItem.qty += 1;
+    } else {
+      newList.push({ ...item, qty: 1 });
+    }
+    let count = 0;
+    newList.forEach(i => {
+      count += i.qty;
+    });
     setSelectOrder(newList);
-    setdrawerDataLength(newList.length);
+    setdrawerDataLength(count);
   }
 
   // console.log(getCurrentDrawer);
@@ -34,6 +45,7 @@ export default function DrawerContextProvider({ children }) {
         getOrder,
         selectOrder,
         drawerDataLength,
+        setSelectOrder,
       }}
     >
       {children}
