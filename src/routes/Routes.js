@@ -1,6 +1,7 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "../componant/Home";
+import EditHomeMenu from "../componant/EditHomeMenu";
 import Login from "../componant/Login";
 import Register from "../componant/Register";
 import MenuBar from "../componant/MenuBar";
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
   { path: "/editmenu", element: <EditMenu /> },
   { path: "/Report", element: <Report /> },
   { path: "/Payment", element: <Payment /> },
+  { path: "/edithomemenu", element: <EditHomeMenu /> },
   { path: "/bill/:bill_id", element: <Bill /> },
 ]);
 export default function Routes() {

@@ -96,7 +96,7 @@ export default function Drawer() {
         <br />
         <div className="flex justify-between px-[20%]  w-full ">
           <span>Difference </span>
-          <span>{showDrawer.exp_drawer - input.act_drawer} Bath</span>
+          <span>{input.act_drawer - showDrawer.exp_drawer} Bath</span>
         </div>
       </div>
       <div className="flex justify-center">

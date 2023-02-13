@@ -9,7 +9,7 @@ export default function DrawerContextProvider({ children }) {
 
   const getCurrentDrawer = async () => {
     const res = await axios.get(`http://localhost:8888/drawer/currentdrawer/`);
-    console.log(res.data);
+    // console.log(res.data);
     setdrawerData(res.data);
     console.log("test " + JSON.stringify(res.data));
   };
