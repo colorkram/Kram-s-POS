@@ -13,6 +13,12 @@ import { useNavigate } from "react-router-dom";
 import { confirm } from "react-confirm-box";
 
 function Payment() {
+  const { authenticatedUser, setAuthenticatedUser } = useContext(AuthContext);
+  useEffect(() => {
+    if (!authenticatedUser) {
+      navigate("/");
+    }
+  }, []);
   const refresh = () => window.location.reload(true);
   // const [abc, setAbc] = useState(123);
   const navigate = useNavigate();
@@ -101,8 +107,8 @@ function Payment() {
                 <div className="bg-white w-full rounded-lg">
                   <div className="flex justify-between ml-6 mr-6 mt-2 ">
                     <span>Menu : {item.menu_name}</span>
+                    <span>Amount: {item.qty}</span>
                     <span>Total: {item.price}</span>
-                    <span>Total: {item.qty}</span>
                   </div>
                   <div className="ml-6 mr-6 mt-5 mb-2">drawer ID : 112</div>
                 </div>
@@ -120,7 +126,7 @@ function Payment() {
             <br />
             <br />
             <label
-              for="MONEY"
+              forHtml="MONEY"
               class="block mb-2 text-sm font-medium text-gray-900 flex justify-center"
             >
               MONEY
@@ -135,7 +141,7 @@ function Payment() {
               class="block w-[250px]  p-[20px] ml-[65px] text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-lg text-center   bg-gray-200   border-white-600   placeholder-white-400   text-black  "
             />
             <label
-              for="MONEY"
+              forHtml="MONEY"
               class="block mb-2 text-sm font-medium text-gray-900 flex justify-center"
             >
               Bath

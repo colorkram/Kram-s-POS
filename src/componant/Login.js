@@ -33,8 +33,11 @@ export default function Login() {
       e.preventDefault();
       // const res = await axios.post("http://localhost:8888/user/login", input);
       await login(input.username, input.password);
-      alert("Signed");
-      navigate("/home?test=");
+
+      await alert("Signed");
+      setTimeout(() => {
+        navigate("/home?test=");
+      }, 1000);
     } catch (err) {
       console.log("err", err);
     }
@@ -110,6 +113,8 @@ export default function Login() {
               >
                 login
               </button>
+              <br></br>
+              <br></br>
             </div>
             <a
               href="/register"

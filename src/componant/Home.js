@@ -9,11 +9,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { DrawerContext } from "../contexts/DrawerContext";
 import { useContext, useState } from "react";
 import OpenDrawer from "./other/openDrawer";
+import { AuthContext } from "../contexts/AuthContext";
 
 function Home() {
-  const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
   const [loading, setLoadding] = useState(true);
+  const navigate = useNavigate();
 
   const {
     drawerData,
@@ -22,7 +23,12 @@ function Home() {
     drawerDataLength,
   } = useContext(DrawerContext);
   // ยิงเช็คจาก context
-
+  const { authenticatedUser, setAuthenticatedUser } = useContext(AuthContext);
+  useEffect(() => {
+    if (!authenticatedUser) {
+      navigate("/");
+    }
+  }, []);
   useEffect(() => {
     getCurrentDrawer();
     setTimeout(() => {
@@ -41,6 +47,7 @@ function Home() {
     <div>
       <div className="container-ipad">
         <HomeTop kram="Codecamp's Shop" />
+
         {loading ? null : (
           <div>
             {drawerData ? ( //ถ้าเปิด drawer ไปแล้วจะเข้าบรรทัดถัดไป ถ้าไม่จะเป็น null

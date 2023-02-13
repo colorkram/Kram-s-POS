@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import React from "react";
+// import { useNavigate } from "react-router-dom";
 
 import * as authApi from "../apis/auth-api";
 import {
@@ -47,7 +48,7 @@ export default function AuthContextProvider({ children }) {
       return false;
     }
   };
-
+  // const navigate = useNavigate();
   const login = async (username, password) => {
     const res = await authApi.login({ username, password });
     setAccessToken(res.data.token);

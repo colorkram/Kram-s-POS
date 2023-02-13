@@ -5,6 +5,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Await, Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import HomeTop from "../template/Home-top";
+import { confirm } from "react-confirm-box";
 import {
   // getAccessToken,
   removeAccessToken,
@@ -12,21 +13,23 @@ import {
 } from "../utils/local-storage";
 import { DrawerContext } from "../contexts/DrawerContext";
 import { AuthContext } from "../contexts/AuthContext";
-// const { authenticatedUser, setAuthenticatedUser } = useContext(AuthContext);
 
 function MenuBar() {
+  const { authenticatedUser, setAuthenticatedUser, logout } = useContext(
+    AuthContext,
+  );
   const refresh = () => window.location.reload(true);
 
   const navigate = useNavigate();
 
-  const logout = async () => {
-    // confirm("อย่าลืมปิดรอบนะ");
+  const logoutFunc = async () => {
+    // await confirm("อย่าลืมปิดรอบนะ");
+    await logout();
     await alert("already logout");
     // await removeAccessToken();
     // await setAuthenticatedUser(null);
 
-    setTimeout(async () => {
-      await refresh();
+    await setTimeout(async () => {
       await navigate("/");
     }, 1000);
   };
@@ -66,7 +69,10 @@ function MenuBar() {
             </div>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <span className="text-[40px] text-red-500 " onClick={logout}>
+            <span
+              className="text-[40px] text-red-500 "
+              onClick={() => logoutFunc()}
+            >
               Log Out
             </span>
           </Link>
