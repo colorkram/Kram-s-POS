@@ -10,7 +10,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import { confirm } from "react-confirm-box";
+import { confirm } from "react-confirm-box";
 
 function Payment() {
   const refresh = () => window.location.reload(true);
@@ -30,6 +30,15 @@ function Payment() {
   // console.log("kram:" + selectOrder);
   // const [totalAmout, setTotalAmout] = useState("");
   let total = [...selectOrder];
+
+  const VoidBill = async () => {
+    const result = await confirm("Are you sure?");
+    if (result) {
+      await navigate("/");
+      await refresh();
+    }
+    console.log("You click No!");
+  };
 
   const pricesSum = e => {
     let sum = 0;
@@ -167,9 +176,9 @@ function Payment() {
             </div>
             <div
               className="flex justify-center pt-[60px] text-[38px] mb-6 text-red-600"
-              onClick={refresh()}
+              onClick={VoidBill}
             >
-              VOID
+              Cancel Bill
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Await, Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import HomeTop from "../template/Home-top";
 import {
@@ -11,12 +11,24 @@ import {
   // setAccessToken,
 } from "../utils/local-storage";
 import { DrawerContext } from "../contexts/DrawerContext";
+import { AuthContext } from "../contexts/AuthContext";
+// const { authenticatedUser, setAuthenticatedUser } = useContext(AuthContext);
 
 function MenuBar() {
-  const logout = () => {
+  const refresh = () => window.location.reload(true);
+
+  const navigate = useNavigate();
+
+  const logout = async () => {
     // confirm("อย่าลืมปิดรอบนะ");
-    removeAccessToken();
-    alert("already logout");
+    await alert("already logout");
+    // await removeAccessToken();
+    // await setAuthenticatedUser(null);
+
+    setTimeout(async () => {
+      await refresh();
+      await navigate("/");
+    }, 1000);
   };
   const {
     drawerData,

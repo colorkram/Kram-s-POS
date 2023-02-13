@@ -35,18 +35,21 @@ export default function Report() {
       <HomeTop kram="Codecamp's Shop" />
       <div className="container-ipad">
         <TitleBar kram="Report" />
-
         <div className="w-auto h-auto px-[12%]">
+          <span className="flex justify-center text-[28px]">
+            ทั้งหมด : {`${report.length}`}
+            {report.length > 1 ? "items" : "item"}
+          </span>
           {report.map(item => (
             <Link
               to={`/allbills?drawer=${item.drawer_id}`}
               style={{ textDecoration: "none", color: "black" }}
             >
               <div>
-                <div className="bg-white w-full rounded-lg">
+                <div className="bg-white w-full rounded-lg snap-y">
                   <div className="flex justify-between ml-6 mr-6 mt-2 ">
                     <span>Drawer ID : {item.drawer_id}</span>
-                    <span>Start Money : {item.sale_money}</span>
+                    <span>Start Money : {item.start_money}</span>
                     <span>Sale amoung: {item.sale_money}</span>
                   </div>
                   <div className="ml-6 mr-6 mt-5 mb-2">
@@ -56,6 +59,11 @@ export default function Report() {
               </div>
             </Link>
           ))}
+
+          <span className="flex justify-center text-[28px]">
+            สิ้นสุดการค้นหา
+          </span>
+          <br></br>
         </div>
       </div>
     </div>

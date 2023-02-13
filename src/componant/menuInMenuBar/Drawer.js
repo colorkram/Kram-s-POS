@@ -100,12 +100,18 @@ export default function Drawer() {
         </div>
       </div>
       <div className="flex justify-center">
-        <div
-          className="flex justify-center mt-[200px] fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  "
-          onClick={submit}
-        >
-          Close Drawer
-        </div>
+        {input.act_drawer != "" ? (
+          <div
+            className="flex justify-center mt-[200px] fixed items-center w-[500px] text-[64px] h-20 text-white bg-[#689081] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  "
+            onClick={submit}
+          >
+            Close Drawer
+          </div>
+        ) : (
+          <div className="flex justify-center mt-[200px] fixed items-center w-[500px] text-[32px] h-20 text-white bg-[#F08080] hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-green-300  rounded-full   text-center  ">
+            Please input Money
+          </div>
+        )}
       </div>
     </div>
   );

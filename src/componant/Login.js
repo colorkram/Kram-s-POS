@@ -41,10 +41,6 @@ export default function Login() {
   };
   return (
     <div className="container-ipad">
-      {/* <FontAwesomeIcon icon={faHome} /> */}
-      {/* <FontAwesomeIcon icon="fa-regular fa-house" /> */}
-      {/* <h1 className="text-3xl font-bold underline">Hello world!</h1> */}
-      {/* <div className="w-full flex justify-center">-</div> */}
       <div className="logo">
         <svg
           width="357"
