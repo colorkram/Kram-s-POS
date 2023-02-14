@@ -33,6 +33,9 @@ function Order() {
     );
     setMenuCard(res.data.map(item => ({ ...item, action: false })));
   };
+  useEffect(() => {
+    getMenuApi();
+  }, [catId, useId]);
   const toggleCss = index => {
     const newMenu = [...menuCard];
     newMenu[index].action = true;
@@ -43,9 +46,7 @@ function Order() {
       setMenuCard(newMenu);
     }, 400);
   };
-  useEffect(() => {
-    getMenuApi();
-  }, [catId, useId]);
+
   return (
     <div className="Menu-container flex justify-center grid grid-cols-3 gap-3">
       {/* mt-26 */}
