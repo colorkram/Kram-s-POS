@@ -14,6 +14,7 @@ import { confirm } from "react-confirm-box";
 
 function Payment() {
   const { authenticatedUser, setAuthenticatedUser } = useContext(AuthContext);
+
   useEffect(() => {
     if (!authenticatedUser) {
       navigate("/");
@@ -32,6 +33,22 @@ function Payment() {
     drawerDataLength,
     setSelectOrder,
   } = useContext(DrawerContext);
+  const submitCurentDrawer = async () => {
+    try {
+      const resBill = await axios.patch(
+        "http://localhost:8888/drawer/currentdrawer",
+        {
+          drawer_id: drawerData.drawer_id,
+        },
+      );
+    } catch (err) {}
+  };
+
+  //
+  //
+  //
+  //
+
   const { getUserData } = useContext(AuthContext);
   // console.log("kram:" + selectOrder);
   // const [totalAmout, setTotalAmout] = useState("");
@@ -86,6 +103,7 @@ function Payment() {
         payment_type: paymentType,
       });
       const billId = resBill.data.createBill.bill_id;
+      await submitCurentDrawer();
       await navigate(`/bill/${billId}`);
     } catch (err) {}
   };
